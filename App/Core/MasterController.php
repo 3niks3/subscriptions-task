@@ -18,10 +18,6 @@ class MasterController
     }
 
     public function view($view,$data=[]){
-//        foreach($data as $variable_name => $variable_value)
-//        {
-//            ${$variable_name} = $variable_value;
-//        }
 
         if(count($data))
         {
