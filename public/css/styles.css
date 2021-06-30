@@ -1,0 +1,346 @@
+/*General*/
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+h1{
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+p{
+    color: #6A707B;
+}
+
+a {
+    text-decoration: underline;
+    color: #131821;
+}
+a:hover{
+    color: #4066A5;
+}
+a:active{
+    color: #233759;
+}
+
+/*Containers*/
+.container{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    background-image: url('/img/image_summer.png');
+    background-repeat: no-repeat;
+    background-position: 680px 0;
+    min-height: 100vh;
+    height: 100%;
+
+}
+div.sidebar{
+    display: flex;
+    flex-direction: column;
+    width: 680px!important;
+    padding:100px;
+    height: 100%;
+}
+div.content{
+    flex: 1 1 auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+div.content-items{
+    background-color: #fff;
+}
+.row{
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    padding:0
+}
+.row>*{
+    width: 100%;
+    max-width: 100%;
+}
+.col{
+    width: 100%;
+}
+
+/*Menu*/
+div.menu{
+    flex: 0 0 auto;
+    background-color: #fff;
+}
+
+div.menu-text{
+    flex: 0 0 auto;
+    width: auto;
+    align-self: center;
+    margin-right:auto;
+}
+
+div.menu-logo{
+    flex: 0 0 auto;
+    width: 40px;
+}
+
+div.menu-list{
+    flex: 1 0 auto;
+    text-align: end;
+}
+
+ul.menu-items{
+    list-style: none;
+}
+
+ul.menu-items li{
+    display: inline;
+    margin: 0 10px 0 0;
+}
+
+ul.menu-items li > a{
+    text-decoration: none;
+    color:#6A707B;
+}
+
+
+
+/*Custom classes*/
+div.col-short{
+    padding:0 40px;
+}
+div.col-large{
+    padding:0 0;
+}
+
+.middle-pos-flex{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.item-gap{
+    gap: 50px;
+}
+.w-auto{
+    width: auto !important;
+}
+.just-content-between{
+    justify-content: space-between;
+}
+.just-content-center{
+    justify-content: center;
+}
+
+/*Input*/
+.input-group{
+    display: flex;
+    width: 100%;
+}
+.input-fields{
+    width: calc(100% + 100px + 83px);
+}
+.input-group input[type='text']{
+    vertical-align: middle;
+    margin: 5px 0px 5px 0;
+    height: 70px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #E3E3E4;
+    border-left: 3px solid #4066A5;
+    width: 100%;
+    padding: 0 15px;
+    outline: none;
+    -webkit-appearance: none;
+}
+.input-group button {
+    background: #fff;
+    margin: 5px 10px 5px 0;
+    padding: 10px;
+    border: 1px solid #E3E3E4;
+    border-left: none;
+    width: 83px;
+    min-width:83px;
+    cursor: pointer;
+
+}
+.input-group>:first-child{
+    margin-right: 0px;
+}
+.input-group>:not(:first-child){
+    margin-left: -1px;
+}
+.input-group>:not(:last-child){
+    margin-left: -1px !important;
+}
+.input-group>:last-child{
+    margin-right: -1px !important;
+}
+.input-group input:focus{
+    border-top:solid thin #4066A5;
+    border-bottom:solid thin #4066A5;
+    border-right: none;
+}
+.input-group input:focus + button{
+    border: solid thin #4066A5;
+    border-left: none;
+}
+
+.input-group input:focus + button > svg > path {
+    fill:#4066A5;
+    opacity: 1;
+}
+.regular-checkbox {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+
+.regular-checkbox:active, .regular-checkbox:checked:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+.regular-checkbox:checked {
+    background-color: #4066A5;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+    color: #99a1a7;
+}
+.regular-checkbox:checked:after {
+    content: '\2714';
+    font-size: 14px;
+    position: absolute;
+    top: 0px;
+    left: 3px;
+    color: #fafafa;
+}
+
+/*Social*/
+a.social-icons{
+    text-decoration: none;
+}
+/*Social Facebook*/
+a.social-icons.facebook > svg > path{
+    opacity: 0.3;
+}
+a.social-icons.facebook:hover > svg,
+a.social-icons.facebook:hover > svg > circle{
+    fill: #4267B2;
+}
+a.social-icons.facebook:active > svg,
+a.social-icons.facebook:active > svg > circle{
+    fill: #2F4A80;
+}
+a.social-icons.facebook:hover > svg > path,
+a.social-icons.facebook:active > svg > path{
+    opacity: 1;
+    fill: #fff;
+}
+/*Social Instagram*/
+a.social-icons.instagram > svg > path{
+    opacity: 0.3;
+}
+a.social-icons.instagram:hover > svg,
+a.social-icons.instagram:hover > svg > circle{
+    fill: #C13584;
+}
+a.social-icons.instagram:active > svg,
+a.social-icons.instagram:active > svg > circle{
+    fill: #8F2762;
+}
+a.social-icons.instagram:hover > svg > path,
+a.social-icons.instagram:active > svg > path{
+    opacity: 1;
+    fill: #fff;
+}
+
+/*Social Twitter*/
+a.social-icons.twitter > svg > path{
+    opacity: 0.3;
+}
+a.social-icons.twitter:hover > svg,
+a.social-icons.twitter:hover > svg > circle{
+    fill: #1DA1F2;
+}
+a.social-icons.twitter:active > svg,
+a.social-icons.twitter:active > svg > circle{
+    fill: #177FBF;
+}
+a.social-icons.twitter:hover > svg > path,
+a.social-icons.twitter:active > svg > path{
+    opacity: 1;
+    fill: #fff;
+}
+
+/*Social Youtube*/
+a.social-icons.youtube > svg > path{
+    opacity: 0.3;
+}
+a.social-icons.youtube:hover > svg,
+a.social-icons.youtube:hover > svg > circle{
+    fill: #FF0000;
+}
+a.social-icons.youtube:active > svg,
+a.social-icons.youtube:active > svg > circle{
+    fill: #CC0000;
+}
+a.social-icons.youtube:hover > svg > path,
+a.social-icons.youtube:active > svg > path{
+    opacity: 1;
+    fill: #fff;
+}
+
+@media all and (max-width: 769px){
+
+    body{
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+    }
+
+    h1{
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .container{
+        background-position: 0 0;
+        background-size:auto;
+    }
+    div.sidebar{
+        width: 100%!important;
+        padding: 0;
+    }
+    div.content{
+        margin: auto 20px;
+    }
+    div.content-items{
+        padding: 30px 20px;
+    }
+    div.menu{
+        padding:10px 20px;
+        width: 100%;
+    }
+
+
+    div.input-fields{
+        width: 100%;
+    }
+
+    div.col-short,
+    div.col-large{
+        padding:0 0;
+    }
+    .item-gap{
+        gap: 20px;
+    }
+}
