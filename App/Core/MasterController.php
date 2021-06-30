@@ -25,7 +25,7 @@ class MasterController
         }
 
         $root = $_SERVER['DOCUMENT_ROOT'];
-        require_once $root.'/App/views/'.$view.'.php';
+        require_once $root.'/views/'.$view.'.php';
 
     }
 }

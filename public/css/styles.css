@@ -20,6 +20,10 @@ h1{
 p{
     color: #6A707B;
 }
+p.error{
+    color: #dc3545;
+    display: none;
+}
 
 a {
     text-decoration: underline;
@@ -74,6 +78,10 @@ div.content-items{
     width: 100%;
 }
 
+.subscribed-container{
+    display:none;
+}
+
 /*Menu*/
 div.menu{
     flex: 0 0 auto;
@@ -110,6 +118,7 @@ ul.menu-items li > a{
     text-decoration: none;
     color:#6A707B;
 }
+
 
 
 
@@ -170,6 +179,9 @@ div.col-large{
     cursor: pointer;
 
 }
+.input-group button:disabled{
+    cursor: not-allowed;
+}
 .input-group>:first-child{
     margin-right: 0px;
 }
@@ -192,7 +204,7 @@ div.col-large{
     border-left: none;
 }
 
-.input-group input:focus + button > svg > path {
+.input-group input:focus + button:not(:disabled) > svg > path {
     fill:#4066A5;
     opacity: 1;
 }

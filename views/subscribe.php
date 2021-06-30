@@ -29,34 +29,61 @@
                 </div>
             </div>
         </div>
+
         <div class="row content">
             <div class="row middle-pos-flex item-gap content-items">
-                <div class="row just-content-center">
-                    <div class="col col-short">
-                        <h1>Subscribe to newsletter</h1>
-                        <p>Subscribe to our newsletter and get 10% discount on pineapple glasses</p>
-                    </div>
-                </div>
 
-                <div class="row just-content-center">
-                    <div class="col col-large">
-                        <div class="input-group input-fields">
-                            <input type="text" placeholder="Type your email address here">
-                            <button type="button">
-                                <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path opacity="0.3" d="M17.7071 0.2929C17.3166 -0.0976334 16.6834 -0.0976334 16.2929 0.2929C15.9023 0.683403 15.9023 1.31658 16.2929 1.70708L20.5858 5.99999H1C0.447693 5.99999 0 6.44772 0 6.99999C0 7.55227 0.447693 7.99999 1 7.99999H20.5858L16.2929 12.2929C15.9023 12.6834 15.9023 13.3166 16.2929 13.7071C16.6834 14.0976 17.3166 14.0976 17.7071 13.7071L23.7071 7.70708C24.0977 7.31658 24.0977 6.6834 23.7071 6.2929L17.7071 0.2929Z" fill="#131821"/>
-                                </svg>
-                            </button>
+                <div class="row subscribe-form-container item-gap">
+                    <div class="row just-content-center">
+                        <div class="col col-short">
+                            <h1>Subscribe to newsletter</h1>
+                            <p>Subscribe to our newsletter and get 10% discount on pineapple glasses</p>
                         </div>
                     </div>
+
+                    <form action="" method="post" id="subscription-form">
+                        <div class="row item-gap">
+
+                            <div class="row just-content-center">
+                                <div class="col col-large">
+                                    <div class="input-group input-fields">
+                                        <input type="text" id="email-input" placeholder="Type your email address here" name="email">
+                                        <button type="submit" id="subscription-submit">
+                                            <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path opacity="0.3" d="M17.7071 0.2929C17.3166 -0.0976334 16.6834 -0.0976334 16.2929 0.2929C15.9023 0.683403 15.9023 1.31658 16.2929 1.70708L20.5858 5.99999H1C0.447693 5.99999 0 6.44772 0 6.99999C0 7.55227 0.447693 7.99999 1 7.99999H20.5858L16.2929 12.2929C15.9023 12.6834 15.9023 13.3166 16.2929 13.7071C16.6834 14.0976 17.3166 14.0976 17.7071 13.7071L23.7071 7.70708C24.0977 7.31658 24.0977 6.6834 23.7071 6.2929L17.7071 0.2929Z" fill="#131821"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <p class="error " id="email-error"></p>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col col-short">
+                                    <label>
+                                        <input type="checkbox" class="regular-checkbox" name="agree" id="terms-of-services" value="1" >
+                                        I agree <a href="#">terms of services</a>
+                                    </label>
+
+                                </div>
+                                <p class="error " id="terms-error"></p>
+                            </div>
+
+                        </div>
+                    </form>
+
                 </div>
 
-                <div class="row ">
-                    <div class="col col-short">
-                        <label>
-                            <input type="checkbox" class="regular-checkbox">
-                            I agree <a href="#">terms of services</a>
-                        </label>
+                <div class="row subscribed-container">
+                    <div class="row just-content-center">
+                        <div class="col col-short">
+                            <img src="/img/success.png">
+                        </div>
+                        <div class="col col-short">
+                            <h1>Thanks for subscribing</h1>
+                            <p>You are successfully subscribed to our email listing. Check your email for the discount code.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -91,13 +118,76 @@
                         </a>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
 
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/js/scripts.js"></script>
+<script src="/js/dataValidator.js"></script>
+
+<script>
+
+    var email_valid = true;
+    var terms_valid = true;
+
+    $('#terms-of-services').change(function(e){
+
+        let terms_validation = dataValidator.validateTerms($(this).prop('checked'), ['required']);
+        processTermsErrors(terms_validation.failed, terms_validation.message)
+
+        if(email_valid && terms_valid){
+            $('button#subscription-submit').prop('disabled',false);
+        }
+    })
+
+    $('#email-input').on('input', function(e){
+
+        let email_value = $('#email-input').val();
+        let email_validation = dataValidator.validateEmail(email_value, ['required', 'email', 'specEmailCheck']);
+        processEmailErrors(email_validation.failed, email_validation.message, true)
+
+
+        if(email_valid && terms_valid){
+            $('button#subscription-submit').prop('disabled',false);
+        }
+
+    }).focusout(function(e){
+        let email_value = $('#email-input').val();
+        let email_validation = dataValidator.validateEmail(email_value, ['required', 'email', 'specEmailCheck']);
+        processEmailErrors(email_validation.failed, email_validation.message)
+
+        if(email_valid && terms_valid){
+            $('button#subscription-submit').prop('disabled',false);
+        }
+    });
+
+    $('form#subscription-form').submit(function(e){
+        e.preventDefault();
+
+        let email_value = $('#email-input').val();
+        let terms_of_service = $('#terms-of-services').prop('checked');
+
+        let email_validation = dataValidator.validateEmail(email_value, ['required', 'email', 'specEmailCheck']);
+        let terms_validation = dataValidator.validateTerms(terms_of_service, ['required']);
+
+        processEmailErrors(email_validation.failed, email_validation.message)
+        processTermsErrors(terms_validation.failed, terms_validation.message)
+
+        if(email_valid && terms_valid)
+        {
+            $('button#subscription-submit').prop('disabled',false);
+            $('.subscribe-form-container').hide();
+            $('.subscribed-container').show();
+        }
+
+    });
+
+
+</script>
+
 </body>
 </html>
