@@ -16,6 +16,7 @@ function processEmailErrors(failed, message, error_not_show = false)
 
 function processTermsErrors(failed, message, error_not_show = false)
 {
+    console.log(message);
     switch(true)
     {
         case(failed && !error_not_show):

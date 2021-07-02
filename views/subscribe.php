@@ -6,7 +6,6 @@ $success_subscription = $_request->exists('flush', 'subscription_success')?$_req
 
 $email_error = $form_errors['email'] ?? '';
 $terms_error = $form_errors['terms'] ?? '';
-
 ?>
 <html>
 <head>
@@ -42,7 +41,7 @@ $terms_error = $form_errors['terms'] ?? '';
         <div class="row content">
             <div class="row middle-pos-flex item-gap content-items">
 
-                <div class="row subscribe-form-container item-gap" <?php echo ($success_subscription && !empty($success_subscription))? 'style="display:none">':''?>>
+                <div class="row subscribe-form-container item-gap" <?= ($success_subscription && !empty($success_subscription))? 'style="display:none">':''?>>
                     <div class="row just-content-center">
                         <div class="col col-short">
                             <h1>Subscribe to newsletter</h1>
@@ -65,8 +64,8 @@ $terms_error = $form_errors['terms'] ?? '';
                                     </div>
 
                                 </div>
-                                <p class="error " id="email-error" <?php echo ($has_errors && !empty($email_error))? 'style="display:block"':''?> >
-                                    <?php echo ($has_errors && !empty($email_error))? $email_error:''?>
+                                <p class="error " id="email-error" <?= ($has_errors && !empty($email_error))? 'style="display:block"':''?> >
+                                    <?=($has_errors && !empty($email_error))? $email_error:''?>
                                 </p>
                             </div>
 
@@ -78,8 +77,8 @@ $terms_error = $form_errors['terms'] ?? '';
                                     </label>
 
                                 </div>
-                                <p class="error " id="terms-error" <?php echo ($has_errors && !empty($terms_error))? 'style="display:block">':''?>>
-                                    <?php echo ($has_errors && !empty($terms_error))? $terms_error:''?>
+                                <p class="error " id="terms-error" <?= ($has_errors && !empty($terms_error))? 'style="display:block"':''?> >
+                                    <?= ($has_errors && !empty($terms_error))? $terms_error:''?>
                                 </p>
                             </div>
 
@@ -184,7 +183,7 @@ $terms_error = $form_errors['terms'] ?? '';
     });
 
     $('form#subscription-form').submit(function(e){
-        return true;
+
         e.preventDefault();
         let email_value = $('#email-input').val();
         let terms_of_service = $('#terms-of-services').prop('checked');
