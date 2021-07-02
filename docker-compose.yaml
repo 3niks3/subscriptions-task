@@ -24,7 +24,7 @@ services:
         build:
             context: ./docker/php_8.0
             dockerfile: Dockerfile                    
-        working_dir: /var/www
+        working_dir: /var/www/sandbox
         volumes:
             - './project:/var/www/sandbox'
             - './docker/php_8.0/local.ini:/usr/local/etc/php/conf.d/local.ini'
