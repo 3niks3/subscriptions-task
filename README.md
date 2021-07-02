@@ -1,15 +1,15 @@
 
-##Subscription service task
+## Subscription service task
 
 Create subscription service without PHP frameworks and Bootstrap
 
-##Task description
+## Task description
 
 1. Create design form example
 2. Add JS functionality for form validation
 3. Create Back-end management features
 
-##Docker setup guide
+## Docker setup guide
 
 1. Clone this reposotory
 2. Go to root directory where is located `docker-compose.yaml` file
@@ -18,7 +18,7 @@ Create subscription service without PHP frameworks and Bootstrap
 5. install composer `docker exec sandbox composer install`
 6. open project in `127.0.0.1:8000`
 
-##Project urls
+## Project urls
  - index - `127.0.0.1:8000`;
  - admin table - `127.0.0.1:8000/members`
  
