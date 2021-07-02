@@ -1,12 +1,16 @@
+
 #Subscription service task
+
 Create subscription service without PHP frameworks and Bootstrap
 
 ##Task description
+
 1. Create design form example
 2. Add JS functionality for form validation
 3. Create Back-end management features
 
 ##Docker setup guide
+
 1. Clone this reposotory
 2. Go to root directory where is located `docker-compose.yaml` file
 3. Build project `docker-compose build`
