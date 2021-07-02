@@ -1,4 +1,13 @@
+<?php
+$has_errors = $_request->exists('flush', 'form_errors') ? true : false;
+$form_errors = $_request->get('flush', 'form_errors');
 
+$success_subscription = $_request->exists('flush', 'subscription_success')?$_request->get('flush', 'subscription_success'):false;
+
+$email_error = $form_errors['email'] ?? '';
+$terms_error = $form_errors['terms'] ?? '';
+
+?>
 <html>
 <head>
     <title>Test</title>
@@ -9,7 +18,7 @@
 
 </head>
 <body>
-<div class="container">
+<div class="container container-bg">
     <div class="sidebar">
 
         <div class="menu">
@@ -33,7 +42,7 @@
         <div class="row content">
             <div class="row middle-pos-flex item-gap content-items">
 
-                <div class="row subscribe-form-container item-gap">
+                <div class="row subscribe-form-container item-gap" <?php echo ($success_subscription && !empty($success_subscription))? 'style="display:none">':''?>>
                     <div class="row just-content-center">
                         <div class="col col-short">
                             <h1>Subscribe to newsletter</h1>
@@ -41,7 +50,7 @@
                         </div>
                     </div>
 
-                    <form action="" method="post" id="subscription-form">
+                    <form action="/storeSubscription" method="post" id="subscription-form">
                         <div class="row item-gap">
 
                             <div class="row just-content-center">
@@ -56,7 +65,9 @@
                                     </div>
 
                                 </div>
-                                <p class="error " id="email-error"></p>
+                                <p class="error " id="email-error" <?php echo ($has_errors && !empty($email_error))? 'style="display:block"':''?> >
+                                    <?php echo ($has_errors && !empty($email_error))? $email_error:''?>
+                                </p>
                             </div>
 
                             <div class="row ">
@@ -67,7 +78,9 @@
                                     </label>
 
                                 </div>
-                                <p class="error " id="terms-error"></p>
+                                <p class="error " id="terms-error" <?php echo ($has_errors && !empty($terms_error))? 'style="display:block">':''?>>
+                                    <?php echo ($has_errors && !empty($terms_error))? $terms_error:''?>
+                                </p>
                             </div>
 
                         </div>
@@ -75,7 +88,7 @@
 
                 </div>
 
-                <div class="row subscribed-container">
+                <div class="row subscribed-container" <?php echo ($success_subscription && !empty($success_subscription))? 'style="display:block"':''?>>
                     <div class="row just-content-center">
                         <div class="col col-short">
                             <img src="/img/success.png">
@@ -126,8 +139,13 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js" integrity="sha512-otOZr2EcknK9a5aa3BbMR9XOjYKtxxscwyRHN6zmdXuRfJ5uApkHB7cz1laWk2g8RKLzV9qv/fl3RPwfCuoxHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/js/scripts.js"></script>
 <script src="/js/dataValidator.js"></script>
+
+<script>
+    window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+</script>
 
 <script>
 
@@ -166,8 +184,8 @@
     });
 
     $('form#subscription-form').submit(function(e){
+        return true;
         e.preventDefault();
-
         let email_value = $('#email-input').val();
         let terms_of_service = $('#terms-of-services').prop('checked');
 
@@ -177,12 +195,38 @@
         processEmailErrors(email_validation.failed, email_validation.message)
         processTermsErrors(terms_validation.failed, terms_validation.message)
 
-        if(email_valid && terms_valid)
+
+        if(!email_valid || !terms_valid)
         {
-            $('button#subscription-submit').prop('disabled',false);
+           e.preventDefault();
+           return false;
+        }
+
+        let target = $(this).attr('action')
+        let data = new FormData($(this)[0]);
+
+        axios.post(target, data).then(function(response){
+
+            let status = response.data.status;
+            let messages = response.data.messages;
+
+            if(status == false) {
+
+                processEmailErrors(true, messages.email);
+                processTermsErrors(true, messages.terms);
+                return;
+            }
+
             $('.subscribe-form-container').hide();
             $('.subscribed-container').show();
-        }
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+        $('button#subscription-submit').prop('disabled',false);
+        // $('.subscribe-form-container').hide();
+        // $('.subscribed-container').show();
 
     });
 
