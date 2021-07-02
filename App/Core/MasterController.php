@@ -15,12 +15,10 @@ class MasterController
         $this->request = $request;
         $this->method = $method;
         $this->url = $url;
-
-
     }
 
-    public function view($view,$data=[]){
-
+    public function view($view,$data=[])
+    {
         $data['_request'] =$this->request;
 
         if(count($data))
@@ -30,6 +28,5 @@ class MasterController
 
         $root = $_SERVER['DOCUMENT_ROOT'];
         require_once $root.'/views/'.$view.'.php';
-
     }
 }

@@ -81,10 +81,7 @@ class Controller extends MasterController
     
     public function members()
     {
-
-        $filter_options = Subscription::getSubscriptionEmailProviders();
-
-        $this->view('subscribe_members', compact('filter_options'));
+        $this->view('subscribe_members');
     }
 
     public function membersGetData()
@@ -97,7 +94,6 @@ class Controller extends MasterController
 
         $filter = $this->request->get('post', 'filter')??false;
 
-
         $order_column = $this->request->get('post', 'order_column')??false;
         $order_column = in_array(strtolower($order_column), ['subscribed', 'email']) ? $order_column : 'subscribed';
 
@@ -106,13 +102,11 @@ class Controller extends MasterController
 
         $search_string = trim($this->request->get('post', 'search')??false);
 
-
         //set where conditions
         $where = [];
         $whereValues = [];
 
         $filter_options = Subscription::getSubscriptionEmailProviders();
-
 
         if(!empty($filter) && in_array($filter, $filter_options)) {
             $where[] = "(SUBSTRING_INDEX(SUBSTR(email, INSTR(email, '@') + 1),'.',1)) = ?";
@@ -124,18 +118,9 @@ class Controller extends MasterController
             $whereValues[] = '%'.$search_string.'%';
         }
 
-
-
-        //get email providers
-
-
         $total_records = Subscription::getTotalRecords($where, $whereValues);
-
         $total_pages = ceil($total_records/$records_per_page);
-
         $page = ($page > $total_pages) ? $total_pages : $page;
-
-
 
         $limit = $records_per_page;
         $offset = $page*$records_per_page-$records_per_page;
@@ -193,7 +178,6 @@ class Controller extends MasterController
 
     public function exportSubscription()
     {
-
         $items = json_decode($this->request->get('post','items'));
         $items_count = count($items);
 
@@ -224,17 +208,12 @@ class Controller extends MasterController
             if($index == 0) {
                 fputcsv($f, array_keys($line), $delimiter);
             }
-            // generate csv lines from the inner arrays
             fputcsv($f, $line, $delimiter);
         }
-        // reset the file pointer to the start of the file
+
         fseek($f, 0);
-        // tell the browser it's going to be a csv file
-        // make php send the generated csv lines to the browser
         fpassthru($f);
 
         die();
-
-
     }
 }

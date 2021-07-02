@@ -2,15 +2,12 @@ class DynamicTable
 {
 
     constructor(container) {
-
         container = (container instanceof Object)?container: $(container);
 
         this.container = container;
         this.table = container.children().find('.dynamicTable-table')
         this.filters = container.find('.dynamicTable-filters')
         this.pagination = container.children().find('.dynamicTable-pagination')
-
-        console.log([this.filters, this.filters.length]);
     }
 
     drawTable(data, current_page, total_pages)

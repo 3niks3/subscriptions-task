@@ -1,0 +1,50 @@
+.container{
+    padding:100px
+}
+
+.gap-10{
+    gap: 10px;
+}
+
+.filters *,
+.dynamicTable-operations *
+{
+    display: inline-block;
+    width: auto;
+    padding: 10px;
+}
+
+.filters > button.filter-button.active{
+    background-color: #4066A5;
+    color: #fff;
+    border-color: #4066A5;
+    border-style: solid;
+}
+
+.dynamicTable-table{
+    border: solid thin black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.dynamicTable-table td{
+    padding: 5px;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.dynamicTable-pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.dynamicTable-pagination a.active {
+    background-color: #4066A5;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

@@ -225,8 +225,6 @@ $terms_error = $form_errors['terms'] ?? '';
         });
 
         $('button#subscription-submit').prop('disabled',false);
-        // $('.subscribe-form-container').hide();
-        // $('.subscribed-container').show();
 
     });
 

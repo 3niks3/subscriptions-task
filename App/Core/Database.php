@@ -16,7 +16,7 @@ class Database
 
     public static function getConnection()
     {
-        if(empty($connection))
+        if(empty(self::$connection))
         {
             $db = new Database();
             self::$connection = $db->connect();
