@@ -9,8 +9,9 @@ services:
         tty: true
         working_dir: /var/www/sandbox
         volumes:
-          - './:/var/www/sandbox'
+          - './project:/var/www/sandbox'
           - './docker/nginx/hosts.conf:/etc/nginx/conf.d/hosts.conf'
+
         ports:
           - '8000:8000'
         depends_on:
@@ -22,19 +23,19 @@ services:
         container_name: sandbox
         build:
             context: ./docker/php_8.0
-            dockerfile: Dockerfile
-        working_dir: /var/www/sandbox
+            dockerfile: Dockerfile                    
+        working_dir: /var/www
         volumes:
-            - './:/var/www/sandbox'
+            - './project:/var/www/sandbox'
             - './docker/php_8.0/local.ini:/usr/local/etc/php/conf.d/local.ini'
         depends_on:
-            - mysql
-        networks:
+            - mysql      
+        networks: 
             - app-network
         ports:
           - '6001:6001'
         expose:
-         - "6001"
+         - "6001"          
     mysql:
         image: mysql:5.7.34
         container_name: mysql
@@ -42,15 +43,16 @@ services:
         ports:
           - '3306:3306'
         volumes:
-            - 'database:/var/lib/mysql'
+            - './docker/database:/var/lib/mysql'
         environment:
-            MYSQL_ROOT_PASSWORD: secret123
+            MYSQL_ROOT_PASSWORD: secret
             MYSQL_USER: user
-            MYSQL_PASSWORD: secret321
-        networks:
+            MYSQL_PASSWORD: secretuser
+        networks: 
             - app-network
 volumes:
   database: null
+  
 
-
-
+            
+        

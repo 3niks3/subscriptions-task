@@ -29,7 +29,7 @@ class Database
     {
         $this->host = 'mysql';
         $this->username = 'root';
-        $this->password = 'secret123';
+        $this->password = 'secret';
         $this->dbname = 'subscription';
         $this->charset = 'utf8mb4';
 

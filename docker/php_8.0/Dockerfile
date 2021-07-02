@@ -9,8 +9,8 @@ RUN apk add --update --no-cache --virtual .build-deps $PHPIZE_DEPS \
         zip \
         unzip \
         git \
-    && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-configure gd  --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysqli pdo pdo_mysql zip \
     && docker-php-ext-install sockets \
     && docker-php-ext-install bcmath \
@@ -18,5 +18,5 @@ RUN apk add --update --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-configure gmp \
     && docker-php-ext-install gmp \
     && docker-php-ext-install exif
-
+	
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
